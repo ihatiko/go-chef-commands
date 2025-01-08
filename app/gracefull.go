@@ -1,7 +1,6 @@
 package app
 
 import (
-	"go.uber.org/zap"
 	"log/slog"
 	"os"
 	"os/signal"
