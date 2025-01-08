@@ -2,11 +2,11 @@ package commands
 
 import (
 	"fmt"
-	"github.com/ihatiko/chef/components/observability/tech"
-	tC "github.com/ihatiko/chef/components/tech/config"
 	"github.com/ihatiko/go-chef-commands/utils"
+	tC "github.com/ihatiko/go-chef-configuration/config"
 	"github.com/ihatiko/go-chef-core-sdk/iface"
 	_ "github.com/ihatiko/go-chef-core-sdk/store"
+	"github.com/ihatiko/go-chef-observability/tech"
 	"github.com/spf13/cobra"
 	"go/ast"
 	"go/parser"
