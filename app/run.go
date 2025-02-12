@@ -16,7 +16,6 @@ type App struct {
 	context    context.Context
 	Components []iface.IComponent
 }
-type SharedComponents map[string][]iface.IComponent
 
 func Modules(components ...iface.IComponent) {
 	app := new(App)

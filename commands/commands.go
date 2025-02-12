@@ -57,9 +57,9 @@ func WithDeployment[Deployment iface.IDeployment](opts ...opt) func() (*cobra.Co
 					os.Exit(1)
 				}
 				commandName := utils.ParseTypeName[Deployment]()
-				err = os.Setenv("TECH_SERVICE_COMMAND", commandName)
+				err = os.Setenv("TECH.SERVICE.COMMAND", commandName)
 				if err != nil {
-					slog.Error("Error in setting environment variable TECH_SERVICE_COMMAND", slog.Any("error", err))
+					slog.Error("Error in setting environment variable TECH.SERVICE.COMMAND", slog.Any("error", err))
 					os.Exit(1)
 				}
 				app := (*d).Dep()
