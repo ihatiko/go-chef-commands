@@ -74,5 +74,5 @@ func Modules(components ...iface.IComponent) {
 			}
 		}(component)
 	}
-	app.Graceful(app.Components)
+	app.Graceful(app.Components, store.PackageStore.Get())
 }

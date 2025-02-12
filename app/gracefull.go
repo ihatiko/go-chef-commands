@@ -10,7 +10,7 @@ import (
 	"github.com/ihatiko/go-chef-core-sdk/iface"
 )
 
-func (a *App) Graceful(components []iface.IComponent) {
+func (a *App) Graceful(components []iface.IComponent, packages []iface.IPkg) {
 	<-a.Wait()
 	a.BeforeShutdown(components)
 	slog.Info("starting shutdown ...")
@@ -22,6 +22,7 @@ func (a *App) Graceful(components []iface.IComponent) {
 	)
 	slog.Info("starting delay [terminating old requests] ... done")
 	a.AfterShutdown(components)
+	a.AfterShutdownPackage(packages)
 	slog.Info("starting shutdown ... done")
 	slog.Info("Server exit properly")
 }
@@ -36,6 +37,19 @@ func (a *App) AfterShutdown(components []iface.IComponent) {
 				slog.Error("shutdown", slog.Any("error", err), slog.String("component", componentName))
 			}
 			slog.Info("starting after shutdown...done", slog.String("component", componentName))
+		}
+	}
+}
+func (a *App) AfterShutdownPackage(components []iface.IPkg) {
+	for _, t := range components {
+		if component, ok := t.(iface.IAfterLifecycleComponent); ok {
+			componentName := component.Name()
+			slog.Info("starting after shutdown...", slog.String("package", componentName))
+			err := component.AfterShutdown()
+			if err != nil {
+				slog.Error("shutdown", slog.Any("error", err), slog.String("package", componentName))
+			}
+			slog.Info("starting after shutdown...done", slog.String("package", componentName))
 		}
 	}
 }
