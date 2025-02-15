@@ -193,6 +193,7 @@ func Compile(rootCommand *cobra.Command, err error) {
 		rootCommand.SetArgs([]string{arg})
 		err := tech.Use(arg)
 		if err != nil {
+			slog.Error("err := tech.Use(arg) compile command", slog.Any("error", err))
 			os.Exit(1)
 		}
 	}
