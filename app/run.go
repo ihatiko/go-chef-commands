@@ -43,6 +43,9 @@ func Modules(components ...iface.IComponent) {
 				slog.Warn("init package", slog.Any("error", pkg.Error()), slog.String("package", packageName))
 			}
 		}
+		if val, ok := pkg.(iface.ILive); ok {
+			store.LivenessStore.Load(val)
+		}
 	}
 	for _, component := range app.Components {
 		store.LivenessStore.Load(component)
